@@ -1,0 +1,69 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8">  
+    <title>汉字与自定义二进制编码转换</title>  
+    <script>  
+        
+        function convertToBinary(text) {  
+            return text.split('').map(function(char) {  
+                return char.charCodeAt().toString(2).padStart(8, '0');  
+            }).join(' ');  
+        }  
+  
+        function convertFromBinary(binary) {  
+            return binary.split(' ').map(function(byte) {  
+                return String.fromCharCode(parseInt(byte, 2));  
+            }).join('');  
+        }  
+  
+        function convertToCustomBinary() {  
+			// 自定义的替换字符
+			var zeroReplacement = document.getElementById("ze").value;
+			var oneReplacement = document.getElementById("on").value;
+			var spaceReplacement = document.getElementById("sp").value;
+            var inputText = document.getElementById('textInput').value;  
+            var binary = convertToBinary(inputText);  
+  
+            // 使用自定义的字符替换0, 1, 和空格  
+            var customBinary = binary.replace(/0/g, zeroReplacement)  
+                                     .replace(/1/g, oneReplacement)  
+                                     .replace(/\s+/g, spaceReplacement);  
+  
+            document.getElementById('customBinaryOutput').innerText = "自定义二进制编码: " + customBinary;  
+        }  
+  
+        function convertFromCustomBinary() {  
+			// 自定义的替换字符
+			var zeroReplacement = document.getElementById("ze").value;
+			var oneReplacement = document.getElementById("on").value;
+			var spaceReplacement = document.getElementById("sp").value;
+            var customBinary = document.getElementById('customBinaryInput').value;  
+  
+            // 将自定义字符替换回原始的二进制值或空格  
+            var binary = customBinary.replace(new RegExp(zeroReplacement, 'g'), '0')  
+                                     .replace(new RegExp(oneReplacement, 'g'), '1')  
+                                     .replace(new RegExp(spaceReplacement, 'g'), ' ');  
+  
+            var decodedText = convertFromBinary(binary);  
+            document.getElementById('textOutput').innerText = "汉字输出: " + decodedText;  
+        }  
+    </script>  
+</head>  
+<body>  
+    <h1>汉字与自定义二进制编码转换器</h1>  
+	<p>0对应的——————1对应的———————空格对应的</p>
+	<input type="text" id="ze" name="0" value="奥" />
+	<input type="text" id="on" name="1" value="利"/>
+	<input type="text" id="sp" name="s" value="给"/>
+    <h2>汉字转自定义二进制编码</h2>  
+    <textarea id="textInput" placeholder="请输入汉字或句子" rows="4" cols="50"></textarea><br>  
+    <button onclick="convertToCustomBinary()">转换</button>  
+    <p id="customBinaryOutput" style="width: 400px; word-break: break-all;"></p>  
+  
+    <h2>自定义二进制编码转回汉字</h2>  
+    <textarea id="customBinaryInput" placeholder="请输入自定义二进制编码" rows="4" cols="50"></textarea><br>  
+    <button onclick="convertFromCustomBinary()">转换</button>  
+    <p id="textOutput" style="width: 400px; word-break: break-all;"></p>  
+</body>  
+</html>
