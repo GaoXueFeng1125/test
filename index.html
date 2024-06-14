@@ -3,6 +3,37 @@
 <head>  
     <meta charset="UTF-8">  
     <title>汉字与自定义二进制编码转换</title>  
+	<style>  
+	        body {  
+	            font-family: Arial, sans-serif;  
+	            margin: 0;  
+	            padding: 0;  
+	            display: flex;  
+	            flex-direction: column;  
+	            align-items: center;  
+	            justify-content: center;  
+	            height: 100vh;  
+	        }  
+			.input-container {  
+			            display: flex;  
+			            align-items: center;  
+			        }  
+			        .input-label {  
+			            margin-right: 10px; /* 根据需要调整标签和输入框之间的间距 */  
+			        } 
+	        @media screen and (max-width: 768px) {  
+	            /* 在小屏幕上放大内容 */  
+	            body {  
+	                font-size: 28px; /* 或者根据需要调整 */  
+	            }  
+	            textarea, input[type="text"] {  
+	                width: 90%; /* 或者使用其他适合移动设备的宽度 */  
+	            }  
+	            p, h1, h2 {  
+	                text-align: center;  
+	            }  
+	        }  
+	    </style>
     <script>  
         
         function convertToBinary(text) {  
@@ -52,10 +83,18 @@
 </head>  
 <body>  
     <h1>汉字与自定义二进制编码转换器</h1>  
-	<p>0对应的——————1对应的———————空格对应的</p>
-	<input type="text" id="ze" name="0" value="奥" />
-	<input type="text" id="on" name="1" value="利"/>
-	<input type="text" id="sp" name="s" value="给"/>
+	<div class="input-container">  
+	        <p class="input-label">0对应的__</p>  
+	        <input type="text" id="ze" name="0" value="奥" />  
+	    </div>  
+	    <div class="input-container">  
+	        <p class="input-label">1对应的__</p>  
+	        <input type="text" id="on" name="1" value="利"/>  
+	    </div>  
+	    <div class="input-container">  
+	        <p class="input-label">空格对应的</p>  
+	        <input type="text" id="sp" name="s" value="给"/>  
+	    </div> 
     <h2>汉字转自定义二进制编码</h2>  
     <textarea id="textInput" placeholder="请输入汉字或句子" rows="4" cols="50"></textarea><br>  
     <button onclick="convertToCustomBinary()">转换</button>  
